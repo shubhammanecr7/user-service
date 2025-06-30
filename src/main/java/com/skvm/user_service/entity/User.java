@@ -10,7 +10,7 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
-    private Integer age;
+    private int age;
 
     public Long getId() {
         return id;
@@ -36,11 +36,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Integer getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(int age) {
         this.age = age;
     }
 }

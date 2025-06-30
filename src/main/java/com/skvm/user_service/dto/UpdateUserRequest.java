@@ -4,7 +4,7 @@ package com.skvm.user_service.dto;
 public class UpdateUserRequest {
     private String firstName;
     private String lastName;
-    private Integer age;
+    private int age;
 
     public UpdateUserRequest(){
     }
@@ -31,11 +31,11 @@ public class UpdateUserRequest {
         this.lastName = lastName;
     }
 
-    public Integer getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(int age) {
         this.age = age;
     }
 }

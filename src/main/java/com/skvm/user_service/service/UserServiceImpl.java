@@ -2,6 +2,7 @@ package com.skvm.user_service.service;
 
 import com.skvm.user_service.dto.UpdateUserRequest;
 import com.skvm.user_service.entity.User;
+import com.skvm.user_service.exceptions.InvalidUserDetailsException;
 import com.skvm.user_service.exceptions.UserNotFoundException;
 import com.skvm.user_service.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -34,14 +35,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(Long id, User user) {
-        if (user.getFirstName() == null || user.getLastName() == null || user.getAge() == null ){
-            throw new Exce
+    public User updateUser(Long id, UpdateUserRequest dto) {
+        if (dto.getFirstName() == null || dto.getLastName() == null || dto.getAge() <= 0 ){
+            throw new InvalidUserDetailsException("Provide valid non-null User details");
         }
         User existing = getUserById(id);
-        existing.setFirstName(user.getFirstName());
-        existing.setLastName(user.getLastName());
-        existing.setAge(user.getAge());
+        existing.setFirstName(dto.getFirstName());
+        existing.setLastName(dto.getLastName());
+        existing.setAge(dto.getAge());
         return userRepository.save(existing);
     }
 
@@ -60,7 +61,7 @@ public class UserServiceImpl implements UserService {
         if (dto.getLastName() != null) {
             existing.setLastName(dto.getLastName());
         }
-        if (dto.getAge() != null){
+        if (dto.getAge() <=0 ){
             existing.setAge(dto.getAge());
         }
         return userRepository.save(existing);
