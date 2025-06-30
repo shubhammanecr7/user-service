@@ -22,6 +22,18 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(InvalidUserDetailsException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidUserDetails(InvalidUserDetailsException e, HttpServletRequest httpServletRequest){
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                e.getMessage(),
+                HttpStatus.NO_CONTENT.value(),
+                httpServletRequest.getRequestURI()
+        );
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.NO_CONTENT);
+    }
+
     //optional catch all
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneralError(Exception e, HttpServletRequest httpServletRequest) {

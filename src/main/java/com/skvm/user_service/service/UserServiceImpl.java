@@ -35,6 +35,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(Long id, User user) {
+        if (user.getFirstName() == null || user.getLastName() == null || user.getAge() == null ){
+            throw new Exce
+        }
         User existing = getUserById(id);
         existing.setFirstName(user.getFirstName());
         existing.setLastName(user.getLastName());
