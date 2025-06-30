@@ -1,5 +1,6 @@
 package com.skvm.user_service.controller;
 
+import com.skvm.user_service.dto.UpdateUserRequest;
 import com.skvm.user_service.entity.User;
 import com.skvm.user_service.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,11 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
         return ResponseEntity.ok(userService.updateUser(id, user));
+    }
+
+    @PatchMapping("/id")
+    public ResponseEntity<User> patchUser(@PathVariable Long id, @RequestBody UpdateUserRequest dto){
+        return ResponseEntity.ok(userService.patchUser(id,dto));
     }
 
     @DeleteMapping("/id")

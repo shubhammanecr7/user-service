@@ -1,5 +1,6 @@
 package com.skvm.user_service.service;
 
+import com.skvm.user_service.dto.UpdateUserRequest;
 import com.skvm.user_service.entity.User;
 import java.util.List;
 
@@ -10,4 +11,5 @@ public interface UserService {
     List<User> getAllUsers();
     User updateUser(Long id,User user);
     void deleteUser(Long id);
+    User patchUser(Long id, UpdateUserRequest dto);
 }
