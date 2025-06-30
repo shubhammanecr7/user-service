@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(Long id, UpdateUserRequest dto) {
-        if (dto.getFirstName() == null || dto.getLastName() == null || dto.getAge() <= 0 ){
+        if (dto.getFirstName() == null || dto.getLastName() == null || dto.getAge() == 0 || dto.getAge() <= 0){
             throw new InvalidUserDetailsException("Provide valid non-null User details");
         }
         User existing = getUserById(id);
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
         if (dto.getLastName() != null) {
             existing.setLastName(dto.getLastName());
         }
-        if (dto.getAge() <=0 ){
+        if (dto.getAge() != null && dto.getAge() >= 0 ){
             existing.setAge(dto.getAge());
         }
         return userRepository.save(existing);

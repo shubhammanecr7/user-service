@@ -4,24 +4,24 @@ import java.time.LocalDateTime;
 
 public class ErrorResponse {
 
-    private LocalDateTime localDateTime;
+    private LocalDateTime timestamp;
     private String message;
     private int status;
     private String path;
 
-    public ErrorResponse(LocalDateTime localDateTime, String message, int status, String path) {
-        this.localDateTime = localDateTime;
+    public ErrorResponse(LocalDateTime timestamp, String message, int status, String path) {
+        this.timestamp = timestamp;
         this.message = message;
         this.status = status;
         this.path = path;
     }
 
     public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+        return timestamp;
     }
 
     public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
+        this.timestamp = localDateTime;
     }
 
     public String getMessage() {

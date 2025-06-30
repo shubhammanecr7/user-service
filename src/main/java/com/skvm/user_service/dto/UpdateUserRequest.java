@@ -1,10 +1,16 @@
 package com.skvm.user_service.dto;
 
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
+
 public class UpdateUserRequest {
+    @Size(min = 1, message = "First name must not be empty")
     private String firstName;
+    @Size(min = 1, message = "Last name must not be empty")
     private String lastName;
-    private int age;
+    @Min(value = 1, message = "Age must be greater than 0")
+    private Integer age;
 
     public UpdateUserRequest(){
     }
@@ -31,11 +37,11 @@ public class UpdateUserRequest {
         this.lastName = lastName;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 }

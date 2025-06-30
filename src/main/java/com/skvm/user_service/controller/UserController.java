@@ -3,10 +3,13 @@ package com.skvm.user_service.controller;
 import com.skvm.user_service.dto.UpdateUserRequest;
 import com.skvm.user_service.entity.User;
 import com.skvm.user_service.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
@@ -33,18 +36,20 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UpdateUserRequest dto) {
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @Valid @RequestBody UpdateUserRequest dto) {
         return ResponseEntity.ok(userService.updateUser(id, dto));
     }
 
-    @PatchMapping("/id")
-    public ResponseEntity<User> patchUser(@PathVariable Long id, @RequestBody UpdateUserRequest dto){
-        return ResponseEntity.ok(userService.patchUser(id,dto));
+    @PatchMapping("/{id}")
+    public ResponseEntity<User> patchUser(@PathVariable Long id, @Valid @RequestBody UpdateUserRequest dto){
+        return ResponseEntity.ok(userService.patchUser(id, dto));
     }
 
-    @DeleteMapping("/id")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Map<String,String>> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
-        return ResponseEntity.noContent().build();
+        Map<String,String> response = new HashMap<>();
+        response.put("message","User with ID-"+id+" was successfully deleted.");
+        return ResponseEntity.ok(response);
     }
 }
